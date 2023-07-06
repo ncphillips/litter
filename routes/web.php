@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,7 +17,7 @@ use App\Entities\Trash;
 |
 */
 
-Route::get('/', function (\Doctrine\ORM\EntityManager $em) {
+Route::get('/', function (EntityManager $em) {
     $all_trash = $em->getRepository(Trash::class)->findAll();
 
     return Inertia::render('Welcome', [
@@ -25,7 +26,7 @@ Route::get('/', function (\Doctrine\ORM\EntityManager $em) {
     ]);
 })->name('home');
 
-Route::post('/trash', function(\Illuminate\Http\Request $request, \Doctrine\ORM\EntityManager $em) {
+Route::post('/trash', function(Request $request, EntityManager $em) {
     $trash = new Trash();
     $trash->content = $request->input('content');
 
