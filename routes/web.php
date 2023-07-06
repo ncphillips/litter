@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Entities\Trash;
+use App\Http\Controllers\TrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +27,7 @@ Route::get('/', function (EntityManager $em) {
     ]);
 })->name('home');
 
-Route::post('/trash', function(Request $request, EntityManager $em) {
-    $trash = new Trash();
-    $trash->content = $request->input('content');
-
-    $em->persist($trash);
-    $em->flush();
-
-    return to_route('home');
-})->name('trash.create');
-
+Route::controller(TrashController::class)->group(function () {
+    Route::post('trash', 'store')->name('trash.store');
+});
 
