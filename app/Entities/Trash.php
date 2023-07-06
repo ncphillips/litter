@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping\Table;
 #[Table(name: 'trash')]
 class Trash
 {
-
     #[Id, Column(name: 'id', type: 'integer'), GeneratedValue()]
     public int $id;
 
