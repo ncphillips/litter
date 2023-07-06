@@ -7,7 +7,10 @@
             <div v-if="form.errors.content">{{ form.errors.content }}</div>
             <button type="submit" :disabled="form.processing">Litter</button>
         </form>
-        <div v-for="trashItem in trash" :key="trashItem.id">
+        <div
+            v-for="trashItem in trash" :key="trashItem.id"
+            class="bg-white border rounded p-4 shadow-sm"
+        >
             <p>{{ trashItem.content }}</p>
             <Link :href="`/trash/${trashItem.id}`">View</Link>
         </div>

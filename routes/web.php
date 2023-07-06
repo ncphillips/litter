@@ -18,7 +18,7 @@ use App\Http\Controllers\TrashController;
 */
 
 Route::get('/', function (EntityManager $em) {
-    $all_trash = $em->getRepository(Trash::class)->findAll();
+    $all_trash = $em->getRepository(Trash::class)->findBy([], ['id' => 'DESC'], 10);
 
     return Inertia::render('Welcome', [
         'message' => 'Hello inertia!',
