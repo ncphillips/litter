@@ -6,13 +6,17 @@
             <textarea id="content" v-model="form.content" />
             <button type="submit">Litter</button>
         </form>
-        <p v-for="trashItem in trash" :key="trashItem.id">
-            {{ trashItem.content }}
-        </p>
+        <div v-for="trashItem in trash" :key="trashItem.id">
+            <p>{{ trashItem.content }}</p>
+            <Link :href="`/trash/${trashItem.id}`">View</Link>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
+import { router, Link } from '@inertiajs/vue3'
+
 defineProps({
     message: {
         type: String,
@@ -26,8 +30,6 @@ defineProps({
 })
 
 
-import { reactive } from 'vue'
-import { router } from '@inertiajs/vue3'
 
 const form = reactive({
     content: "",

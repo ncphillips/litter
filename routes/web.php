@@ -2,7 +2,6 @@
 
 use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Facades\Route;
-use \Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Entities\Trash;
 use App\Http\Controllers\TrashController;
@@ -29,5 +28,6 @@ Route::get('/', function (EntityManager $em) {
 
 Route::controller(TrashController::class)->group(function () {
     Route::post('trash', 'store')->name('trash.store');
+    Route::get('trash/{id}', 'show')->name('trash.view');
 });
 
