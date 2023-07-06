@@ -1,10 +1,11 @@
 <template>
     <div>
         <h1>{{ message }}</h1>
-        <form @submit.prevent="submit" style="width: fit-content; display: flex; gap: 12px; flex-direction: column; padding: 12px; border: 1px solid black;">
+        <form @submit.prevent="form.post('/trash')" style="width: fit-content; display: flex; gap: 12px; flex-direction: column; padding: 12px; border: 1px solid black;">
             <label for="content">Got some garbage?</label>
             <textarea id="content" v-model="form.content" />
-            <button type="submit">Litter</button>
+            <div v-if="form.errors.content">{{ form.errors.content }}</div>
+            <button type="submit" :disabled="form.processing">Litter</button>
         </form>
         <div v-for="trashItem in trash" :key="trashItem.id">
             <p>{{ trashItem.content }}</p>
@@ -14,8 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { router, Link } from '@inertiajs/vue3'
+import { Link, useForm} from '@inertiajs/vue3'
 
 defineProps({
     message: {
@@ -31,13 +31,7 @@ defineProps({
 
 
 
-const form = reactive({
+const form = useForm({
     content: "",
 })
-
-function submit() {
-    router.post('/trash', form)
-    form.content = ""
-}
-
 </script>
