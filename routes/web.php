@@ -22,7 +22,7 @@ Route::get('/', function (EntityManager $em) {
 
     return Inertia::render('Welcome', [
         'message' => 'Hello inertia!',
-        'trash' => $all_trash
+        'trash' => $all_trash,
     ]);
 })->name('home');
 

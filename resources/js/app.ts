@@ -2,6 +2,7 @@ import {createApp, DefineComponent, h} from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import "./bootstrap"
 import '../css/app.css';
+import BaseLayout from "./Layouts/BaseLayout.vue";
 
 createInertiaApp({
     setup({ el, App, props, plugin }) {
@@ -12,7 +13,11 @@ createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
 
-        return pages[`./Pages/${name}.vue`] as DefineComponent
+        const page = pages[`./Pages/${name}.vue`] as DefineComponent
+
+        page.default.layout = page.default.layout || BaseLayout
+
+        return page
     },
 }).then(() => {
     //

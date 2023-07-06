@@ -1,24 +1,24 @@
 <template>
-    <div>
-        <h1>{{ message }}</h1>
-        <form @submit.prevent="form.post('/trash')" style="width: fit-content; display: flex; gap: 12px; flex-direction: column; padding: 12px; border: 1px solid black;">
+    <div class="stack vertical gap-4">
+        <h1 class="heading xxl">{{ message }}</h1>
+        <form @submit.prevent="form.post('/trash')" class="card p-4 stack vertical gap-4">
             <label for="content">Got some garbage?</label>
-            <textarea id="content" v-model="form.content" />
+            <textarea id="content" v-model="form.content" class="input p-4" />
             <div v-if="form.errors.content">{{ form.errors.content }}</div>
             <button type="submit" :disabled="form.processing">Litter</button>
         </form>
         <div
             v-for="trashItem in trash" :key="trashItem.id"
-            class="bg-white border rounded p-4 shadow-sm"
+            class="bg-white border border-emerald-700 rounded p-4 shadow-sm"
         >
             <p>{{ trashItem.content }}</p>
-            <Link :href="`/trash/${trashItem.id}`">View</Link>
+            <Link :href="`/trash/${trashItem.id}`" class="link">View</Link>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { Link, useForm} from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 
 defineProps({
     message: {
@@ -31,8 +31,6 @@ defineProps({
         required: true,
     },
 })
-
-
 
 const form = useForm({
     content: "",
