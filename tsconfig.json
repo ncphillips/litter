@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "target": "es5",
+        "types": ["vite/client"],
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
