@@ -15,7 +15,12 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $trash = new \App\Entities\Trash();
+    $trash->id = 1;
+    $trash->content = 'This is some unhinged trash content right here!';
+
     return Inertia::render('Welcome', [
         'message' => 'Hello inertia!',
+        'trash' => [$trash]
     ]);
 });
