@@ -11,8 +11,12 @@ class TrashController extends Controller
 {
     public function store(Request $request, EntityManager $em)
     {
+        $attributes = $request->validate([
+            'content' => 'required|string'
+        ]);
+
         $trash = new Trash();
-        $trash->content = $request->input('content');
+        $trash->content = $attributes['content'];
 
         $em->persist($trash);
         $em->flush();
